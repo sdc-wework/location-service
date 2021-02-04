@@ -13,12 +13,12 @@ const Image = styled.div`
 margin-right: 1.25rem;
 `
 
-const NearbyTransit = ({name}) => (
+const NearbyTransit = ({option}) => (
   <Item>
     <Image>
       <FontAwesomeIcon icon={faCoffee} />
     </Image>
-    {name}
+    {option.name} {option.type}
   </Item>
 );
 

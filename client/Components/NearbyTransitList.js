@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NearbyTransit from './NearbyTransit';
 import styled from 'styled-components';
 
@@ -8,15 +8,19 @@ const List = styled.ul`
   padding: 0;
   `
 
-const NearbyTransitList = ({transitOptions}) => (
-  <>
-    <h3>NEARBY TRANSIT</h3>
-    <List>
-    { transitOptions.map((option, i) => (
-        <NearbyTransit key={i} name={option} />
-      )) }
-    </List>
-  </>
-);
+const NearbyTransitList = ({nearbyTransits}) => {
+
+  return (
+    <>
+      <h3>NEARBY TRANSIT</h3>
+      <List>
+      { nearbyTransits.map((option, i) => (
+          <NearbyTransit key={i} option={option} />
+        )) }
+      </List>
+    </>
+  );
+}
+
 
 export default NearbyTransitList;

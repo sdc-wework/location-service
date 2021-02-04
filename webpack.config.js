@@ -1,6 +1,4 @@
 const path = require('path');
-import mapboxgl from '!mapbox-gl';
-
 
 module.exports = {
   entry: "./client/index.js",
