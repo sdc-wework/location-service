@@ -9,13 +9,12 @@ const List = styled.ul`
   `
 
 const NearbyTransitList = ({nearbyTransits}) => {
-
   return (
     <>
       <h3>NEARBY TRANSIT</h3>
       <List>
       { nearbyTransits.map((option, i) => (
-          <NearbyTransit key={i} option={option} />
+          <NearbyTransit key={nearbyTransits.id} option={option} />
         )) }
       </List>
     </>

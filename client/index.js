@@ -21,7 +21,8 @@ const App = () => {
 
   useEffect(() => {
 
-    const id = window.location.pathname.split('/')[2];
+    let splitUrl = window.location.pathname.split('/').filter(el => el);
+    const id = splitUrl[splitUrl.length - 1];
 
     fetch(`http://localhost:5001/api/nearbyworkspaces/address/${id}`)
       .then(data => {
