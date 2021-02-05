@@ -1,22 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Map from './Components/Map';
 import NearbyTransitList from './Components/NearbyTransitList';
 
-const App = () => (
-  <div className="map-wrapper">
-    <h2>Location</h2>
-    <address style={{
-      'whiteSpace': 'pre-line',
-      'marginBottom': '2rem'
-  }}>
-    415 Mission Street<br />
-    San Francisco, CA 94105
-    </address>
-    <Map />
-    <NearbyTransitList transitOptions={['option 1', 'option 2', 'option 3']}/>
-  </div>
-)
+const App = () => {
+
+  const [locationData, updateLocationData] = useState(
+    {
+      coordinates: [0, 0],
+      streetName: 'loading',
+      streetNumber: 'loading',
+      city: 'loading',
+      state: 'loading',
+      zip: 'loading'
+    });
+
+  const [nearbyTransits, updateNearbyTransits] = useState([]);
+
+  const { streetName, streetNumber, city, state, zip } = locationData;
+
+  useEffect(() => {
+
+    let splitUrl = window.location.pathname.split('/').filter(el => el);
+    const id = splitUrl[splitUrl.length - 1];
+
+    fetch(`http://localhost:5001/api/nearbyworkspaces/address/${id}`)
+      .then(data => {
+        return data.json()
+      })
+      .then(json => {
+        updateLocationData(json);
+      })
+      .catch(err => {
+        console.err(err);
+      });
+
+      fetch(`http://localhost:3002/api/getNearbyTransitOptions/${id}`)
+        .then(data => {
+          return data.json();
+        })
+        .then(json => {
+          const options = json.nearbyTransitOptions;
+          updateNearbyTransits(options);
+        })
+
+  }, []);
+
+  return (
+    <div className="map-wrapper">
+      <h2>Location</h2>
+      <address style={{
+        'whiteSpace': 'pre-line',
+        'marginBottom': '2rem'
+    }}>
+      {streetNumber} {streetName}<br />
+      {city}, {state} {zip}
+      </address>
+      <Map locationData={locationData}/>
+      <NearbyTransitList nearbyTransits={nearbyTransits}/>
+    </div>
+  )
+}
+
 
 const root = document.getElementById('location-service');
 ReactDOM.render(<App />, root);

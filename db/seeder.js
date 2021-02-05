@@ -28,15 +28,6 @@ const generateRandomIndex = (max) => {
   return Math.floor(Math.random() * max);
 }
 
-const getTransit = (id, type, name) => {
-  return {
-    _id: id,
-    type: type,
-    name: name
-  }
-}
-
-
 const seedData = (data) => {
 
   seeder.connect(db, () => {
@@ -71,7 +62,17 @@ getRandomWords()
     ]
 
     for (let i = 0; i < 100; i++) {
-      const option = getTransit(i, transitOptions[generateRandomIndex(transitOptions.length)], collection[generateRandomIndex(collection.length)]);
+      let option = {
+        _id: i,
+        nearbyTransitOptions: []
+      }
+      for (let j = 0; j < 8; j ++) {
+        option.nearbyTransitOptions.push({
+          name: collection[generateRandomIndex(collection.length)],
+          type: transitOptions[generateRandomIndex(transitOptions.length)]
+        })
+
+      }
       seedingData[0].documents.push(option);
     }
 

@@ -1,6 +1,5 @@
 const path = require('path');
-import mapboxgl from '!mapbox-gl';
-
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: "./client/index.js",
@@ -18,5 +17,8 @@ module.exports = {
         },
       }
     ]
-  }
+  },
+  plugins: [
+    new Dotenv()
+ ]
 }
