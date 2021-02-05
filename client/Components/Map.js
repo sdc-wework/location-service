@@ -15,7 +15,7 @@ const Map = ({locationData}) => {
   const coordinates = [locationData.coordinates[1], locationData.coordinates[0]]
 
   useEffect(() => {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0dWxpbiIsImEiOiJja2pxM3l6bWkxZWxzMnFsZXB3ZTIzc3czIn0.7IMhPn6ShNGyxqpxSw-LCA';
+    mapboxgl.accessToken = process.env.KEY;
     const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',

@@ -64,8 +64,7 @@ getRandomWords()
     for (let i = 0; i < 100; i++) {
       let option = {
         _id: i,
-        nearbyTransitOptions: [
-        ]
+        nearbyTransitOptions: []
       }
       for (let j = 0; j < 8; j ++) {
         option.nearbyTransitOptions.push({
