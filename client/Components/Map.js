@@ -8,6 +8,14 @@ const Wrapper = styled.div`
     height: 320px;
   }
 
+  .marker {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border: #000 4px solid;
+    border-radius: 50%;
+    opacity: 0.99;
+  }
 `
 
 const Map = ({locationData}) => {
@@ -21,8 +29,37 @@ const Map = ({locationData}) => {
     style: 'mapbox://styles/mapbox/streets-v11',
     center: coordinates,
     zoom: 9
+    });
+
+    const geojson = {
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: coordinates
+        },
+        properties: {
+          title: locationData.streetNumber + ' ' + locationData.streetName,
+        }
+      }]
+    };
+
+    geojson.features.forEach(marker => {
+
+      const el = document.createElement('div');
+      el.className = 'marker';
+
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25, closeButton: false }) // add popups
+        .setHTML('<h3>' + marker.properties.title + '</h3>'))
+        .addTo(map);
+    });
+
 });
-  });
 
   return (
     <Wrapper>
