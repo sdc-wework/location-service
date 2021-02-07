@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components'
 
 import mapboxgl from 'mapbox-gl';
@@ -40,7 +40,6 @@ const Wrapper = styled.div`
   .building-link:hover {
     text-decoration: underline
   }
-
 `
 
 const Map = ({locationData}) => {
@@ -53,11 +52,10 @@ const Map = ({locationData}) => {
     mapboxgl.accessToken = process.env.KEY;
     const map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
+    style: 'mapbox://styles/christulin/ckkvmm2w448sw17nv9a3cwuqm',
     center: coordinates,
     zoom: 11
     });
-
 
     const el = document.createElement('div');
     el.className = 'marker';
@@ -83,24 +81,8 @@ const Map = ({locationData}) => {
         .addTo(map);
     });
 
-    var nav = new mapboxgl.NavigationControl({showCompass: false});
+    const nav = new mapboxgl.NavigationControl({showCompass: false});
     map.addControl(nav, 'top-left');
-
-
-
-    // geojson.features.forEach(marker => {
-
-    //   const el = document.createElement('div');
-    //   el.className = 'marker';
-
-    //   new mapboxgl.Marker(el)
-    //     .setLngLat(marker.geometry.coordinates)
-    //     .addTo(map)
-    //     .setLngLat(marker.geometry.coordinates)
-    //     .setPopup(new mapboxgl.Popup({ offset: 25, closeButton: false })
-    //     .setHTML('<h3>' + marker.properties.title + '</h3>'))
-    //     .addTo(map);
-    // });
 
 });
 
