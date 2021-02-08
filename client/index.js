@@ -7,24 +7,29 @@ const App = () => {
 
   const [locationData, updateLocationData] = useState(
     {
-      coordinates: [0, 0],
-      streetName: 'loading',
-      streetNumber: 'loading',
-      city: 'loading',
-      state: 'loading',
-      zip: 'loading'
+      origin: {
+        geometry: {
+          coordinates: [0, 0]
+        },
+        streetName: 'loading',
+        streetNumber: 'loading',
+        city: 'loading',
+        state: 'loading',
+        zip: 'loading'
+      },
+      nearbyWorkspaces: []
     });
 
   const [nearbyTransits, updateNearbyTransits] = useState([]);
-
-  const { streetName, streetNumber, city, state, zip } = locationData;
+  const { origin } = locationData;
+  const { streetName, streetNumber, city, state, zip } = origin;
 
   useEffect(() => {
 
     let splitUrl = window.location.pathname.split('/').filter(el => el);
     const id = splitUrl[splitUrl.length - 1];
 
-    fetch(`http://localhost:5001/api/nearbyworkspaces/address/${id}`)
+    fetch(`http://localhost:5001/api/nearbyworkspaces/buildings/${id}`)
       .then(data => {
         return data.json()
       })
