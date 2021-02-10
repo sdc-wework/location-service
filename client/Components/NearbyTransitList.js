@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import NearbyTransit from './NearbyTransit';
 import styled from 'styled-components';
+import { faTrain, faBus, faBicycle, faRoad} from '@fortawesome/free-solid-svg-icons'
 
 const List = styled.ul`
   list-style-type: none;
@@ -8,13 +9,31 @@ const List = styled.ul`
   padding: 0;
   `
 
+const Wrapper = styled.div`
+  .transit-title {
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-size: 16px;
+  }
+`
+
 const NearbyTransitList = ({nearbyTransits}) => {
+
+  const types = {
+    Metro: faTrain,
+    Bus: faBus,
+    'bike path': faBicycle,
+    freeway: faRoad
+  }
+
   return (
     <>
-      <h3>NEARBY TRANSIT</h3>
+      <Wrapper>
+        <p className="transit-title">NEARBY TRANSIT</p>
+      </Wrapper>
       <List>
-      { nearbyTransits.map((option, i) => (
-          <NearbyTransit key={nearbyTransits.id} option={option} />
+      { nearbyTransits.map((option) => (
+          <NearbyTransit key={nearbyTransits.id} option={option} type={types[option.type]}/>
         )) }
       </List>
     </>
