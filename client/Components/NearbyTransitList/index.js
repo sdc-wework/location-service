@@ -1,21 +1,7 @@
-import React, {useEffect} from 'react';
-import NearbyTransit from './NearbyTransit';
-import styled from 'styled-components';
-import { faTrain, faBus, faBicycle, faRoad} from '@fortawesome/free-solid-svg-icons'
-
-const List = styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  `
-
-const Wrapper = styled.div`
-  .transit-title {
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    font-size: 16px;
-  }
-`
+import React from 'react';
+import NearbyTransit from '../NearbyTransit';
+import { faTrain, faBus, faBicycle, faRoad} from '@fortawesome/free-solid-svg-icons';
+import { Wrapper, List } from './styles'
 
 const NearbyTransitList = ({nearbyTransits}) => {
 
@@ -39,6 +25,5 @@ const NearbyTransitList = ({nearbyTransits}) => {
     </>
   );
 }
-
 
 export default NearbyTransitList;

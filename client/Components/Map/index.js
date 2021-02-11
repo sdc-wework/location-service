@@ -1,46 +1,6 @@
 import React, {useEffect} from 'react';
-import styled from 'styled-components'
-
 import mapboxgl from 'mapbox-gl';
-
-const Wrapper = styled.div`
-  #map {
-    height: 320px;
-  }
-
-  .marker {
-    width: 10px;
-    height: 10px;
-    background-color: #000;
-    border: #000 4px solid;
-    border-radius: 50%;
-    opacity: 0.99;
-  }
-
-  .marker.nearby {
-    background-color: transparent;
-    border: blue 4px solid;
-  }
-
-  .building-link {
-    line-height: 20px;
-    height: 100%;
-    width: 137.8px;
-    color: blue;
-    font-size: 16px;
-    text-align: center;
-    text-decoration: none;
-    appearance: none;
-    background: none;
-    border: 0;
-    padding: 0;
-    outline: none;
-  }
-
-  .building-link:hover {
-    text-decoration: underline
-  }
-`
+import { Wrapper } from './styles';
 
 const Map = ({locationData}) => {
 
@@ -69,8 +29,8 @@ const Map = ({locationData}) => {
       .addTo(map);
 
     nearbyWorkspaces.forEach(workspace => {
-        const el = document.createElement('div');
-        el.className = 'marker nearby';
+      const el = document.createElement('div');
+      el.className = 'marker nearby';
 
       new mapboxgl.Marker(el)
         .setLngLat(workspace.geometry.coordinates)
