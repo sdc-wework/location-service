@@ -53,10 +53,18 @@ const App = () => {
 
   return (
     <div className="map-wrapper">
-      <h2>Location</h2>
+      <h2 style={{
+        'fontSize': '2rem',
+        'fontWeight': '600',
+        'lineHeight': '2.75rem',
+        'marginBottom': '1rem',
+      }}>Location</h2>
       <address style={{
         'whiteSpace': 'pre-line',
-        'marginBottom': '2rem'
+        'marginBottom': '2rem',
+        'fontSize': '16px',
+        'fontStyle': 'normal',
+        'lineHeight': '1.5rem'
     }}>
       {streetNumber} {streetName}<br />
       {city}, {state} {zip}
