@@ -29,7 +29,7 @@ const App = () => {
     let splitUrl = window.location.pathname.split('/').filter(el => el);
     const id = splitUrl[splitUrl.length - 1];
 
-    fetch(`http://localhost:5001/api/nearbyworkspaces/buildings/${id}`)
+    fetch(`/api/nearbyworkspaces/buildings/${id}`)
       .then(data => {
         return data.json()
       })
@@ -40,7 +40,7 @@ const App = () => {
         console.err(err);
       });
 
-      fetch(`http://localhost:3002/api/getNearbyTransitOptions/${id}`)
+      fetch(`/api/getNearbyTransitOptions/${id}`)
         .then(data => {
           return data.json();
         })
