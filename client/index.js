@@ -37,7 +37,7 @@ const App = () => {
         updateLocationData(json);
       })
       .catch(err => {
-        console.err(err);
+        console.error(err);
       });
 
       fetch(`/api/getNearbyTransitOptions/${id}`)

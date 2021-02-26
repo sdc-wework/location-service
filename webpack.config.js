@@ -1,5 +1,7 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: "./client/index.js",
@@ -19,6 +21,8 @@ module.exports = {
     ]
   },
   plugins: [
-    new Dotenv()
+    new Dotenv(),
+    new BundleAnalyzerPlugin(),
+    new CompressionPlugin()
  ]
 }
