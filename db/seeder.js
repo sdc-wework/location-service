@@ -1,6 +1,6 @@
 const seeder = require('mongoose-seed');
 const https = require('https');
-const db = "mongodb://localhost/nearby-transit";
+const db = "mongodb://localhost/nearby";
 
 const transitOptions = [
   'Metro',
@@ -10,15 +10,11 @@ const transitOptions = [
 ]
 
 const getRandomWords = () => {
-
   return new Promise((resolve, reject) => {
-
     https.get('https://hipsum.co/api/?type=hipster-centric&sentences=3', res => {
-
       res.setEncoding("utf8");
       res.on('data', data => {
         resolve(data);
-
       })
     })
   })
@@ -29,36 +25,26 @@ const generateRandomIndex = (max) => {
 }
 
 const seedData = (data) => {
-
   seeder.connect(db, () => {
-
-    seeder.loadModels(['./db/index.js']);
-
-    seeder.clearModels(['nearby-transit'], () => {
-
+    seeder.loadModels(['./index.js']);
+    seeder.clearModels(['nearby'], () => {
       seeder.populateModels(data, () => {
-
         seeder.disconnect();
-
       })
     })
   })
 }
 
-
 getRandomWords()
   .then(words => {
-
     const collection = words.split(' ')
     collection.pop();
     collection.shift()
-
     let seedingData = [
       {
-        'model': 'nearby-transit',
+        'model': 'nearby',
         'documents': []
       }
-
     ]
 
     for (let i = 0; i < 100; i++) {
@@ -75,7 +61,5 @@ getRandomWords()
       }
       seedingData[0].documents.push(option);
     }
-
     seedData(seedingData);
-
   })
