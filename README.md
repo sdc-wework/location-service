@@ -40,19 +40,19 @@ npm install
 All the CRUD operations fall under one endpoint via query parameters. 
 
 Endpoint to get data /api/getNearbyTransitOptions/:id
-The endpoint is /api/updateNearbyTransitOptions/:id
-
-To add an entry to database you want to use 3 key words:
-'add', 'update', 'del'
+Same endpoint to update and delete are followed by specific put and delete requests
 
 For example:
-/api/updateNearbyTransitOptions/?add=1 
+POST request
+/api/updateNearbyTransitOptions/
 in addition to your json object will add a document to the first available id incrementing. (Notice that you won't need to provide an ID in URL)
 
-/api/updateNearbyTransitOptions/55?update=id
+/api/updateNearbyTransitOptions/55
+PUT request
 a update requires that you provide an id parameter and a 'update' query of true.
 
-/api/updateNearbyTransitOptions/22?del=1
+/api/updateNearbyTransitOptions/22
+DELETE request
 deletes record at id number provided.
 
 At the moment, finding nearby workspaces requires a database from a separate service on the same application. Randomized data will be seeded into the final database implementation. 
