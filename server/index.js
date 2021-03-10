@@ -43,7 +43,11 @@ app.put('/api/getNearbyTransitOptions/:id', async (req, res)=> {
   }
 });
 
+<<<<<<< HEAD
 app.delete('/api/getNearbyTransitOptions/:id', async (req, res)=> {
+=======
+app.put('/api/getNearbyTransitOptions/:id', async (req, res)=> {
+>>>>>>> be2f23961d884f54bd2ac03f80a5ae97c95e61c1
   const {id} = req.params;
   const response = await deleteNearbyTransitOptions(id);
   if (response) {
