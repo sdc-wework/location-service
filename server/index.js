@@ -24,22 +24,8 @@ app.get('/api/getNearbyTransitOptions/:id', async (req, res) => {
   }
 });
 
-app.post('/api/updateNearbyTransitOptions/:id', async (req, res) => {
-  const {add, update, del} = req.query;
-  const {id} = req.params;
-  let response;
-
-  if(add==='1'){
-    response = await addNearbyTransitOptions(req.body);
-  }else if(update==='1'){
-    response = await updateNearbyTransitOptions(id, req.body);
-  }else if(del==='1'){
-    response = await deleteNearbyTransitOptions(id);
-  }else{
-    res.status(400).send('No query parameters to change data');
-  }
-
-  //figure out how to return a response for success on post
+app.post('/api/getNearbyTransitOptions/:id', async (req, res) => {
+  const response = await addNearbyTransitOptions(req.body);
   if (response) {
     res.status(200).send('Success');
   } else {
@@ -47,6 +33,25 @@ app.post('/api/updateNearbyTransitOptions/:id', async (req, res) => {
   }
 });
 
+app.put('/api/getNearbyTransitOptions/:id', async (req, res)=> {
+  const {id} = req.params;
+  const response = await updateNearbyTransitOptions(id, req.body);
+  if (response) {
+    res.status(200).send('Success');
+  } else {
+    res.status(500).send('Error in adding new entry');
+  }
+});
+
+app.put('/api/getNearbyTransitOptions/:id', async (req, res)=> {
+  const {id} = req.params;
+  const response = await deleteNearbyTransitOptions(id);
+  if (response) {
+    res.status(200).send('Success');
+  } else {
+    res.status(500).send('Error in deleting new entry');
+  }
+});
 
 app.get('/api/nearbyworkspaces/buildings/:id', async (req, res) => {
   const { id } = req.params;
